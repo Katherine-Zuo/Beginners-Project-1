@@ -1,0 +1,39 @@
+word = "tulips"
+word_completion = "_" * len(word)
+guessed = False
+guessed_letters = []
+tries = 10
+print("Let's play Hangman!")
+print(word_completion)
+print("\n")
+    
+while not guessed and tries > 0:
+        guess = input("Guess a letter: ").lower()
+        if len(guess) == 1 and guess.isalpha():
+            if guess in guessed_letters:
+                print("You already guessed that letter!")
+            elif guess not in word:
+                print("Nope")
+                tries -= 1
+                guessed_letters.append(guess)
+            else:
+                print("Good guess!")
+                guessed_letters.append(guess)
+                word_as_list = list(word_completion)
+                for i in range(len(word)):
+                    if word[i] == guess:
+                        word_as_list[i] = guess
+                word_completion = "".join(word_as_list)
+                if "_" not in word_completion:
+                    guessed = True
+        else:
+            print("Invalid input")
+        print(word_completion)
+        print("\n")
+    
+if guessed:
+        print("You got it! The word was:", word)
+else:
+        print("He died rip :(")
+        print("The word was:", word)
+
